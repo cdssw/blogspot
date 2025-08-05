@@ -68,18 +68,18 @@
 
     .header-title {
         margin: 10px 0;
-    }    
+    }
 
     /* 내비게이션 바 내부 컨텐츠 스타일 */
     .navbar {
         display: flex;
-        justify-content: space-between; 
+        justify-content: space-between;
         width: 100%;
         max-width: 768px;
         list-style: none;
         margin: 0 auto;
         border-radius: 30px;
-        box-shadow: 
+        box-shadow:
             0 2px 5px 0 rgba(0, 0, 0, 0.1),
             0 2px 10px 0 rgba(0, 0, 0, 0.05);
     }
@@ -101,16 +101,19 @@
     }
 
     .navbar li a {
-        display: block; /* a 태그가 li 영역 전체를 차지하도록 */
-        text-decoration: none; 
+        display: block;
+        /* a 태그가 li 영역 전체를 차지하도록 */
+        text-decoration: none;
         color: darkgrey;
-        padding: 10px; /* 이 padding 값을 부모 li의 padding과 동일하게 설정 */
+        padding: 10px;
+        /* 이 padding 값을 부모 li의 padding과 동일하게 설정 */
     }
 
     .navbar .active {
         background-color: #cbc4cc;
-        border-radius: 30px; /* li의 둥근 모서리 */
-    }    
+        border-radius: 30px;
+        /* li의 둥근 모서리 */
+    }
 
     .navbar .active a {
         color: white;
@@ -160,6 +163,57 @@
         /* 디버깅용 배경색 */
     }
 
+    /* 768px보다 작은 화면에 대한 스타일 (Tablet & Mobile) */
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px 10px;
+            /* 태블릿에서는 양쪽 패딩을 약간 줄임 */
+        }
+
+        #header,
+        #footer {
+            padding: 15px 10px;
+            /* 헤더/푸터 패딩 조정 */
+        }
+
+        .nav-container {
+            padding: 0 25px;
+        }
+
+        .main-content {
+            padding: 0 15px;
+        }
+    }
+
+    /* 480px보다 작은 화면에 대한 스타일 (Mobile) */
+    @media (max-width: 480px) {
+        .container {
+            max-width: 100%;
+            /* 모바일에서는 화면 전체 너비를 사용 (단, 좌우 패딩은 유지) */
+            padding: 0 5px;
+            /* 모바일에서는 양쪽 패딩을 더 줄임 */
+        }
+
+        #header,
+        #footer {
+            padding: 0 5px;
+            /* 헤더/푸터 패딩 조정 */
+        }
+
+        .nav-container {
+            padding: 0 25px;
+        }
+
+        .main-content {
+            padding: 0 20px 20px;
+        }
+
+        /* 모바일에서 글꼴 크기 등 조절 예시 */
+        body {
+            font-size: 14px;
+        }
+    }    
+
     /* 위젯 (b:widget) 스타일 */
     .main-content>.widget {
         flex-grow: 1;
@@ -187,11 +241,11 @@
 
     /* 공통 */
     .item {
-      text-align: left;
+        text-align: left;
     }
 
     .line {
-      padding-bottom: 2px;
+        padding-bottom: 2px;
     }
 
     .title-white {
@@ -229,30 +283,101 @@
         font-size: 1rem;
     }
 
-    .back-blue-color-1 { background: #77BEF0; }
-    .back-blue-color-2 { background: #58A0C8; }
-    .back-blue-color-3 { background: #34699A; }
-    .back-blue-color-4 { background: #113F67; }
-    .back-blue-color-5 { background: #77BEF0; }
-    .back-blue-color-6 { background: #58A0C8; }
-    .back-blue-color-7 { background: #34699A; }
-    .back-blue-color-8 { background: #113F67; }    
-    .back-green-color-1 { background: #8ABB6C; }
-    .back-green-color-2 { background: #5E936C; }
-    .back-green-color-3 { background: #4A9782; }
-    .back-green-color-4 { background: #3E5F44; } 
-    .back-green-color-5 { background: #8ABB6C; }
-    .back-green-color-6 { background: #5E936C; }
-    .back-green-color-7 { background: #4A9782; }
-    .back-green-color-8 { background: #3E5F44; }
-    .back-red-color-1 { background: #FF9898; }
-    .back-red-color-2 { background: #DA6C6C; }
-    .back-red-color-3 { background: #CD5656; }
-    .back-red-color-4 { background: #AF3E3E; } 
-    .back-red-color-5 { background: #FF9898; }
-    .back-red-color-6 { background: #DA6C6C; }
-    .back-red-color-7 { background: #CD5656; }
-    .back-red-color-8 { background: #AF3E3E; }    
+    .back-blue-color-1 {
+        background: #77BEF0;
+    }
+
+    .back-blue-color-2 {
+        background: #58A0C8;
+    }
+
+    .back-blue-color-3 {
+        background: #34699A;
+    }
+
+    .back-blue-color-4 {
+        background: #113F67;
+    }
+
+    .back-blue-color-5 {
+        background: #77BEF0;
+    }
+
+    .back-blue-color-6 {
+        background: #58A0C8;
+    }
+
+    .back-blue-color-7 {
+        background: #34699A;
+    }
+
+    .back-blue-color-8 {
+        background: #113F67;
+    }
+
+    .back-green-color-1 {
+        background: #8ABB6C;
+    }
+
+    .back-green-color-2 {
+        background: #5E936C;
+    }
+
+    .back-green-color-3 {
+        background: #4A9782;
+    }
+
+    .back-green-color-4 {
+        background: #3E5F44;
+    }
+
+    .back-green-color-5 {
+        background: #8ABB6C;
+    }
+
+    .back-green-color-6 {
+        background: #5E936C;
+    }
+
+    .back-green-color-7 {
+        background: #4A9782;
+    }
+
+    .back-green-color-8 {
+        background: #3E5F44;
+    }
+
+    .back-red-color-1 {
+        background: #FF9898;
+    }
+
+    .back-red-color-2 {
+        background: #DA6C6C;
+    }
+
+    .back-red-color-3 {
+        background: #CD5656;
+    }
+
+    .back-red-color-4 {
+        background: #AF3E3E;
+    }
+
+    .back-red-color-5 {
+        background: #FF9898;
+    }
+
+    .back-red-color-6 {
+        background: #DA6C6C;
+    }
+
+    .back-red-color-7 {
+        background: #CD5656;
+    }
+
+    .back-red-color-8 {
+        background: #AF3E3E;
+    }
 
     /* 카드 박스 */
     .card-box {
@@ -280,12 +405,12 @@
         border-radius: 12px;
         height: 120px;
         padding: 20px;
-        
+
         /* 머터리얼 디자인의 "Level 1" 그림자 */
         /* 그림자 3개를 겹쳐서 만듭니다. */
-        box-shadow: 
+        box-shadow:
             0 2px 5px 0 rgba(0, 0, 0, 0.1),
-            0 2px 10px 0 rgba(0, 0, 0, 0.05);       
+            0 2px 10px 0 rgba(0, 0, 0, 0.05);
     }
 
     .card-link {
@@ -307,10 +432,10 @@
         /* 약간 위로 떠오르는 효과 */
         transition: all 0.3s ease;
         /* 부드러운 전환 효과 */
-        box-shadow: 
-            0 8px 10px 1px rgba(0, 0, 0, 0.14), 
-            0 3px 14px 2px rgba(0, 0, 0, 0.12), 
-            0 5px 5px -3px rgba(0, 0, 0, 0.2);        
+        box-shadow:
+            0 8px 10px 1px rgba(0, 0, 0, 0.14),
+            0 3px 14px 2px rgba(0, 0, 0, 0.12),
+            0 5px 5px -3px rgba(0, 0, 0, 0.2);
     }
 
 
@@ -328,51 +453,8 @@
     }
 
     .item-icon {
-      text-align: right;
-      margin-top: -17px;
-    }
-
-    /* 768px보다 작은 화면에 대한 스타일 (Tablet & Mobile) */
-    @media (max-width: 768px) {
-        .container {
-            padding: 15px 10px;
-            /* 태블릿에서는 양쪽 패딩을 약간 줄임 */
-        }
-
-        #header,
-        #footer {
-            padding: 15px 10px;
-            /* 헤더/푸터 패딩 조정 */
-        }
-
-        .main-content {
-            padding: 15px;
-        }
-    }
-
-    /* 480px보다 작은 화면에 대한 스타일 (Mobile) */
-    @media (max-width: 480px) {
-        .container {
-            max-width: 100%;
-            /* 모바일에서는 화면 전체 너비를 사용 (단, 좌우 패딩은 유지) */
-            padding: 0 5px;
-            /* 모바일에서는 양쪽 패딩을 더 줄임 */
-        }
-
-        #header,
-        #footer {
-            padding: 0 5px;
-            /* 헤더/푸터 패딩 조정 */
-        }
-
-        .main-content {
-            padding: 0 20px 20px;
-        }
-
-        /* 모바일에서 글꼴 크기 등 조절 예시 */
-        body {
-            font-size: 14px;
-        }
+        text-align: right;
+        margin-top: -17px;
     }
 
     /* 기존 댓글, 공유버튼 등 숨기기 (혹시 상속된 경우 대비) */
@@ -399,15 +481,6 @@
     .more-link,
     .continue-reading {
         display: none !important;
-    }
-
-    .material-symbols-outlined {
-        color: #023667; /* 아이콘 색상 (예시: 녹색) */
-        font-variation-settings:
-            'FILL' 1,   /* 아이콘을 채움 (1로 설정) */
-            'wght' 800, /* 두께 (기본값) */
-            'GRAD' 0,   /* 명암 (기본값) */
-            'opsz' 48;  /* 광학 크기 (기본값) */
     }
 
 ]]>
