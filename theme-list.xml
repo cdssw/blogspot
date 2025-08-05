@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true'
+    b:templateUrl='custom-template.xml' b:templateVersion='1.0.0' xmlns='http://www.w3.org/1999/xhtml'
+    xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data'
+    xmlns:expr='http://www.google.com/2005/gml/expr'>
+
+<head>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport' />
+    <title>
+        <data:view.title.escaped />
+    </title>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js' />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<b:skin>
+    <![CDATA[
+
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+    /* 기본 스타일: 모든 화면에 적용 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', Arial, sans-serif;
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+        min-height: 100vh;
+        /* 최소 높이를 뷰포트 높이로 설정하여 footer가 항상 아래에 있도록 함 */
+        display: flex;
+        /* body를 flex 컨테이너로 설정 */
+        flex-direction: column;
+        /* 자식 요소들을 세로로 정렬 (header, .container, footer) */
+    }
+
+    #header,
+    #footer {
+        flex-shrink: 0;
+        /* 헤더와 푸터는 줄어들지 않도록 함 */
+        padding: 20px 15px;
+        /* 기본 패딩 */
+        text-align: center;
+    }
+
+    #footer {
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .header {
+        display: flex;
+        /* header를 Flex 컨테이너로 설정 */
+        justify-content: center;
+        /* header의 자식 div를 가로 중앙에 정렬 */
+        align-items: center;
+        height: 100px;
+        flex-direction: column;
+    }
+
+    .header-title {
+        margin: 10px 0;
+    }    
+
+    /* 내비게이션 바 내부 컨텐츠 스타일 */
+    .navbar {
+        display: flex;
+        justify-content: space-between; 
+        width: 100%;
+        max-width: 768px;
+        list-style: none;
+        margin: 0 auto;
+        border-radius: 30px;
+        box-shadow: 
+            0 2px 5px 0 rgba(0, 0, 0, 0.1),
+            0 2px 10px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-container {
+        flex-grow: 1;
+        /* 남은 공간을 모두 차지하도록 설정 */
+        width: 100%;
+        max-width: 768px;
+        /* 최대 가로 길이 768px */
+        margin: 0 auto;
+        /* 가운데 정렬 */
+        padding: 0 40px 15px;
+    }
+
+    .navbar li {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .navbar li a {
+        display: block; /* a 태그가 li 영역 전체를 차지하도록 */
+        text-decoration: none; 
+        color: darkgrey;
+        padding: 10px; /* 이 padding 값을 부모 li의 padding과 동일하게 설정 */
+    }
+
+    .navbar .active {
+        background-color: #cbc4cc;
+        border-radius: 30px; /* li의 둥근 모서리 */
+    }    
+
+    .navbar .active a {
+        color: white;
+    }
+
+    /* 전체 컨테이너에 최대 가로 길이 적용 및 중앙 정렬 */
+    .container {
+        flex-grow: 1;
+        /* 남은 공간을 모두 차지하도록 설정 */
+        width: 100%;
+        max-width: 768px;
+        /* 최대 가로 길이 768px */
+        margin: 0 auto;
+        /* 가운데 정렬 */
+        padding: 0 20px 15px;
+        /* 양쪽에 여백 추가 (부트스트랩의 기본 .container 패딩과 유사) */
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+        display: flex;
+        /* .container를 Flex 컨테이너로 설정 */
+        flex-direction: column;
+        /* 메인 콘텐츠를 세로로 쌓음 (기본 위젯 배치를 위함) */
+        justify-content: center;
+        /* 세로 중앙 정렬 (내부 위젯이 하나일 경우 유용) */
+        align-items: center;
+        /* 가로 중앙 정렬 (내부 위젯이 하나일 경우 유용) */
+    }
+
+    /* 메인 콘텐츠 영역 (b:section id="main") */
+    .main-content {
+        display: flex;
+        /* 이 섹션도 Flex 컨테이너로 설정 */
+        flex-direction: column;
+        /* 위젯들을 세로로 쌓음 */
+        align-items: center;
+        /* 위젯들을 가로 중앙으로 정렬 */
+        justify-content: center;
+        /* 위젯들을 세로 중앙으로 정렬 */
+        flex-grow: 1;
+        /* 컨테이너 내에서 사용 가능한 모든 공간을 차지하도록 함 */
+        width: 100%;
+        /* 부모 너비에 꽉 차게 */
+        padding: 20px;
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+        background-color: #fff;
+        /* 디버깅용 배경색 */
+    }
+
+    /* 위젯 (b:widget) 스타일 */
+    .main-content>.widget {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        /* 위젯들을 세로로 쌓음 */
+        margin-bottom: 20px;
+        /* 위젯 간 간격 */
+        width: 100%;
+        /* 위젯이 부모의 너비를 꽉 채우도록 */
+        text-align: center;
+        /* 위젯 내부 텍스트 중앙 정렬 */
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+    }
+
+    /* 마지막 위젯은 하단 마진 제거 */
+    .main-content>.widget:last-child {
+        margin-bottom: 0;
+    }
+
+    .ad-area {
+        margin-bottom: 20px;
+    }
+
+    /* 공통 */
+    .item {
+      text-align: left;
+    }
+
+    .line {
+      padding-bottom: 2px;
+    }
+
+    .title-white {
+        color: white;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .h3-title-black {
+        color: #222831;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .title-black {
+        color: #222831;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .content-white {
+        color: white;
+        font-size: 1rem;
+    }
+
+    .content-black {
+        color: #222831;
+        font-size: 1rem;
+    }
+
+    .content-grey {
+        color: grey;
+        font-size: 1rem;
+    }
+
+    .back-blue-color-1 { background: #77BEF0; }
+    .back-blue-color-2 { background: #58A0C8; }
+    .back-blue-color-3 { background: #34699A; }
+    .back-blue-color-4 { background: #113F67; }
+    .back-blue-color-5 { background: #77BEF0; }
+    .back-blue-color-6 { background: #58A0C8; }
+    .back-blue-color-7 { background: #34699A; }
+    .back-blue-color-8 { background: #113F67; }    
+    .back-green-color-1 { background: #8ABB6C; }
+    .back-green-color-2 { background: #5E936C; }
+    .back-green-color-3 { background: #4A9782; }
+    .back-green-color-4 { background: #3E5F44; } 
+    .back-green-color-5 { background: #8ABB6C; }
+    .back-green-color-6 { background: #5E936C; }
+    .back-green-color-7 { background: #4A9782; }
+    .back-green-color-8 { background: #3E5F44; }
+    .back-red-color-1 { background: #FF9898; }
+    .back-red-color-2 { background: #DA6C6C; }
+    .back-red-color-3 { background: #CD5656; }
+    .back-red-color-4 { background: #AF3E3E; } 
+    .back-red-color-5 { background: #FF9898; }
+    .back-red-color-6 { background: #DA6C6C; }
+    .back-red-color-7 { background: #CD5656; }
+    .back-red-color-8 { background: #AF3E3E; }    
+
+    /* 카드 박스 */
+    .card-box {
+        display: flex;
+        flex-direction: column;
+        /* 위젯들을 세로로 쌓음 */
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+        margin-bottom: 20px;
+    }
+
+    .card-body-column-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .card-body-column-1 {
+        display: grid;
+        grid-template-columns: 100%;
+        gap: 10px;
+    }
+
+    .card-button {
+        border-radius: 12px;
+        height: 120px;
+        padding: 20px;
+        
+        /* 머터리얼 디자인의 "Level 1" 그림자 */
+        /* 그림자 3개를 겹쳐서 만듭니다. */
+        box-shadow: 
+            0 2px 5px 0 rgba(0, 0, 0, 0.1),
+            0 2px 10px 0 rgba(0, 0, 0, 0.05);       
+    }
+
+    .card-link {
+        text-decoration: none;
+        /* 밑줄 제거 */
+        color: inherit;
+        /* 부모 요소의 글자색 상속 */
+        display: block;
+        /* 카드 전체를 클릭 가능하게 만들기 위해 블록 요소로 */
+        height: 100%;
+        /* 부모 높이를 채워서 클릭 영역 확대 */
+        width: 100%;
+        /* 부모 너비를 채워서 클릭 영역 확대 */
+    }
+
+    /* 호버 효과 */
+    .card-button:hover {
+        transform: scale(1.01);
+        /* 약간 위로 떠오르는 효과 */
+        transition: all 0.3s ease;
+        /* 부드러운 전환 효과 */
+        box-shadow: 
+            0 8px 10px 1px rgba(0, 0, 0, 0.14), 
+            0 3px 14px 2px rgba(0, 0, 0, 0.12), 
+            0 5px 5px -3px rgba(0, 0, 0, 0.2);        
+    }
+
+
+    /* 디스크립션 박스 */
+    .desc-box {
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        /* 위젯들을 세로로 쌓음 */
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+        background: #e7f0ff;
+        margin-bottom: 20px;
+        padding: 30px;
+    }
+
+    .item-icon {
+      text-align: right;
+      margin-top: -17px;
+    }
+
+    /* 768px보다 작은 화면에 대한 스타일 (Tablet & Mobile) */
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px 10px;
+            /* 태블릿에서는 양쪽 패딩을 약간 줄임 */
+        }
+
+        #header,
+        #footer {
+            padding: 15px 10px;
+            /* 헤더/푸터 패딩 조정 */
+        }
+
+        .main-content {
+            padding: 15px;
+        }
+    }
+
+    /* 480px보다 작은 화면에 대한 스타일 (Mobile) */
+    @media (max-width: 480px) {
+        .container {
+            max-width: 100%;
+            /* 모바일에서는 화면 전체 너비를 사용 (단, 좌우 패딩은 유지) */
+            padding: 0 5px;
+            /* 모바일에서는 양쪽 패딩을 더 줄임 */
+        }
+
+        #header,
+        #footer {
+            padding: 0 5px;
+            /* 헤더/푸터 패딩 조정 */
+        }
+
+        .main-content {
+            padding: 0 20px 20px;
+        }
+
+        /* 모바일에서 글꼴 크기 등 조절 예시 */
+        body {
+            font-size: 14px;
+        }
+    }
+
+    /* 기존 댓글, 공유버튼 등 숨기기 (혹시 상속된 경우 대비) */
+    .post-footer,
+    .comments,
+    .comments-section,
+    .share-buttons,
+    .post-meta,
+    .post-tags,
+    .feed-links,
+    .post-labels,
+    .post-author,
+    .post-timestamp,
+    .post-comment-link {
+        display: none !important;
+    }
+
+
+    /* "자세한 내용 보기" 관련 요소 숨기기 */
+    .jump-link,
+    .jump-link a,
+    .read-more,
+    .post-snippet,
+    .more-link,
+    .continue-reading {
+        display: none !important;
+    }
+
+    .material-symbols-outlined {
+        color: #023667; /* 아이콘 색상 (예시: 녹색) */
+        font-variation-settings:
+            'FILL' 1,   /* 아이콘을 채움 (1로 설정) */
+            'wght' 800, /* 두께 (기본값) */
+            'GRAD' 0,   /* 명암 (기본값) */
+            'opsz' 48;  /* 광학 크기 (기본값) */
+    }
+
+]]>
+</b:skin>
+
+<body>
+    <!-- Header -->
+    <header class='header'>
+        <div class="header-title">
+            <h3 class='h3-title-black'>
+                <data:blog.title />
+            </h3>
+        </div>
+        <div class='nav-container'>
+            <ul class="navbar">
+                <li><a href="#">홈</a></li>
+                <li class="active"><a href="#">카테고리</a></li>
+                <li><a href="#">태그</a></li>
+                <li><a href="#">소개</a></li>
+            </ul>
+        </div>
+    </header>
+    <!-- Main Layout -->
+    <div class='container' id="main-content-wrapper">
+        <b:section id='main' class='main-content'>
+            <b:widget id='Blog1' locked='false' title='블로그 게시물' type='Blog' version='1'>
+                <b:includable id='main'>
+                    <b:loop values='data:posts' var='post'>
+                        <script class='post-json' type='application/json'>
+                        {
+                            "title": "<data:post.title.jsonEscaped/>",
+                            "body": "<data:post.body.jsonEscaped/>",
+                            "url": "<data:post.url.jsonEscaped/>",
+                            "labels": [
+                            <b:loop values='data:post.labels' var='label'>
+                                "<data:label.name.jsonEscaped/>"<b:if cond='data:label.isLast != "true"'>,</b:if>
+                            </b:loop>
+                            ]
+                        }
+                        </script>
+                    </b:loop>
+
+                    <b:if cond='data:view.isHomepage'>
+                        <div class='desc-box'>
+                            <div class='item title-black'>DESC 제목</div>
+                            <div class='item content-grey'>설명글1
+                                <br />설명글2
+                                <br />설명글3
+                            </div>
+                            <div class='item desc-icon'>desc-icon</div>
+                        </div>
+                        <div class='card-box'>
+                            <div class='item title-black'>타이틀</div>
+                            <div class='item card-body-column-2' id='req'>
+                            </div>
+                        </div>
+                        <div class='ad-area'>
+                        </div>
+                    </b:if>
+                </b:includable>
+
+            </b:widget>
+        </b:section>
+    </div>
+
+    <!-- Footer -->
+    <footer id='footer'>
+        <div>&#169;
+            <data:blog.title /> All rights reserved.
+        </div>
+    </footer>
+    <script>
+        // JavaScript 부분은 이전과 동일하게 유지
+        $(document).ready(function () {
+            const posts = [];
+            const currentURI = window.location.pathname;
+            console.log("현재 URI (경로):", currentURI);
+
+            $(".post-json").each(function () {
+                try {
+                    const json = JSON.parse($(this).text());
+                    posts.push(json);
+                } catch (e) {
+                    console.error("JSON 파싱 오류:", e);
+                }
+            });
+
+            console.log("포스트 데이터:", posts);
+
+            const p1 = posts.filter(f => f.labels[0] === "신청방법").slice().reverse();
+            $(p1).each(function (index, item) {
+                // 1. [link]...[/link] 추출
+                const linkMatch = item.body.match(/\[link\](.*?)\[\/link\]/i);
+                const link = linkMatch ? linkMatch[1] : "#";
+
+                // 2. 본문에서 [link] 제거
+                const cleanedBody = item.body.replace(/\[link\](.*?)\[\/link\]/i, "").trim();
+
+                const colorNumber = index + 1;
+                const newCard = `
+                    <div class='card-button back-blue-color-${colorNumber}'>
+                        <div class='title-white'>${$(this)[0].title}</div>
+                        <div class='content-white'>${cleanedBody}</div>
+                        <div class='card-icon'/>
+                    </div>
+                `;
+                $("#req").append(newCard);
+            });
+        });
+    </script>
+</body>
+
+</html>
