@@ -490,7 +490,7 @@
     <div class='container' id="main-content-wrapper">
         <b:section id='main' class='main-content'>
             <b:widget id='Blog1' locked='false' title='블로그 게시물' type='Blog' version='1'>
-                <b:includable id='main'>
+                <b:includable id='post'>
                     <b:loop values='data:posts' var='post'>
                         <script class='post-json' type='application/json'>
                         {
