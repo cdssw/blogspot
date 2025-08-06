@@ -28,6 +28,33 @@
         --desc-color: #FBFBFB;
     }
 
+    /* 블로그 스팟 숨김 */
+    /* 기존 댓글, 공유버튼 등 숨기기 (혹시 상속된 경우 대비) */
+    .post-footer,
+    .comments,
+    .comments-section,
+    .share-buttons,
+    .post-meta,
+    .post-tags,
+    .feed-links,
+    .post-labels,
+    .post-author,
+    .post-timestamp,
+    .post-comment-link {
+        display: none !important;
+    }
+
+
+    /* "자세한 내용 보기" 관련 요소 숨기기 */
+    .jump-link,
+    .jump-link a,
+    .read-more,
+    .post-snippet,
+    .more-link,
+    .continue-reading {
+        display: none !important;
+    }    
+
     /* 기본 스타일: 모든 화면에 적용 */
     * {
         margin: 0;
@@ -50,7 +77,6 @@
         /* 자식 요소들을 세로로 정렬 (header, .container, footer) */
 
         background-color: var(--background-color);
-        color: var(--text-color);
     }
 
     #header,
@@ -401,32 +427,6 @@
         right: 20px;
         color: grey;
         font-size: 2rem;
-    }
-
-    /* 기존 댓글, 공유버튼 등 숨기기 (혹시 상속된 경우 대비) */
-    .post-footer,
-    .comments,
-    .comments-section,
-    .share-buttons,
-    .post-meta,
-    .post-tags,
-    .feed-links,
-    .post-labels,
-    .post-author,
-    .post-timestamp,
-    .post-comment-link {
-        display: none !important;
-    }
-
-
-    /* "자세한 내용 보기" 관련 요소 숨기기 */
-    .jump-link,
-    .jump-link a,
-    .read-more,
-    .post-snippet,
-    .more-link,
-    .continue-reading {
-        display: none !important;
     }
 
     .card-button-color-0 {
