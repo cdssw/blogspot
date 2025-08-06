@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true'
+    b:templateUrl='custom-template.xml' b:templateVersion='1.0.0' xmlns='http://www.w3.org/1999/xhtml'
+    xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data'
+    xmlns:expr='http://www.google.com/2005/gml/expr'>
+
+<head>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport' />
+    <title>
+        <data:view.title.escaped />
+    </title>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js' />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<b:skin>
+    <![CDATA[
+
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+    /* 기본 스타일: 모든 화면에 적용 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', Arial, sans-serif;
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+        min-height: 100vh;
+        /* 최소 높이를 뷰포트 높이로 설정하여 footer가 항상 아래에 있도록 함 */
+        display: flex;
+        /* body를 flex 컨테이너로 설정 */
+        flex-direction: column;
+        /* 자식 요소들을 세로로 정렬 (header, .container, footer) */
+        -webkit-tap-highlight-color: transparent;
+        /* 터치하이라이트 제거 */
+    }
+
+    #header,
+    #footer {
+        flex-shrink: 0;
+        /* 헤더와 푸터는 줄어들지 않도록 함 */
+        padding: 20px 15px;
+        /* 기본 패딩 */
+        text-align: center;
+    }
+
+    #footer {
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .header {
+        position: sticky; /* 스크롤 시 상단에 고정 */
+        top: 0; /* 상단에 붙임 */
+        width: 100%;
+        max-width: 768px; /* 추가: 헤더의 최대 가로 길이 768px */
+        margin: 0 auto; /* 추가: 헤더를 가운데 정렬 */
+        background-color: #fff; /* 배경색을 주어 아래 내용이 비치지 않게 함 */
+        z-index: 1000; /* 다른 요소 위에 오도록 z-index 설정 */
+        display: flex; /* 기존 flex 속성 유지 */
+        justify-content: space-between; /* 아이템들을 양쪽 끝으로 정렬 */
+        align-items: center;
+        height: 60px;
+        padding: 0 15px; /* 양쪽 패딩 추가 */
+        box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
+    }
+
+    .back-button {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #222831; /* 헤더 텍스트와 동일하게 */
+        font-weight: bold;
+        font-size: 1rem;
+        padding: 8px 12px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        width: 80px;
+    }
+
+    .back-button:hover {
+        background-color: #f0f0f0;
+    }
+
+    .back-button .material-symbols-outlined {
+        font-size: 1.2rem;
+        margin-right: 5px;
+        color: #222831; /* 아이콘 색상도 동일하게 */
+        font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24; /* 아이콘 설정 조정 */
+    }    
+
+    /* 헤더 내 좌우 균형을 위한 컨테이너 스타일 */
+    .back-button-container,
+    .header-right-placeholder {
+        flex: 1; /* 이 두 요소가 사용 가능한 공간을 균등하게 분할하여 가운데 요소를 중앙으로 밈 */
+        min-width: 40px; /* 너무 작아지지 않도록 최소 너비 설정 */
+        /* background-color: lightblue; /* 디버깅용 */ */
+    }
+
+    /* 타이틀을 포함하는 div에 대한 스타일 (header의 두 번째 자식) */
+    .header > div:nth-child(2) {
+        flex-grow: 0; /* 더 이상 커지지 않음 */
+        flex-shrink: 0; /* 더 이상 작아지지 않음 */
+        flex-basis: auto; /* 콘텐츠 너비에 맞춤 */
+        text-align: center; /* 타이틀 텍스트 자체를 가운데 정렬 */
+        /* background-color: lightcoral; /* 디버깅용 */ */
+    }
+
+    /* 전체 컨테이너에 최대 가로 길이 적용 및 중앙 정렬 */
+    .container {
+        flex-grow: 1;
+        /* 남은 공간을 모두 차지하도록 설정 */
+        width: 100%;
+        max-width: 768px;
+        /* 최대 가로 길이 768px */
+        margin: 0 auto;
+        /* 가운데 정렬 */
+        padding: 0 20px 15px;
+        /* 양쪽에 여백 추가 (부트스트랩의 기본 .container 패딩과 유사) */
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+        display: flex;
+        /* .container를 Flex 컨테이너로 설정 */
+        flex-direction: column;
+        /* 메인 콘텐츠를 세로로 쌓음 (기본 위젯 배치를 위함) */
+        justify-content: center;
+        /* 세로 중앙 정렬 (내부 위젯이 하나일 경우 유용) */
+        align-items: center;
+        /* 가로 중앙 정렬 (내부 위젯이 하나일 경우 유용) */
+    }
+
+    /* 메인 콘텐츠 영역 (b:section id="main") */
+    .main-content {
+        display: flex;
+        /* 이 섹션도 Flex 컨테이너로 설정 */
+        flex-direction: column;
+        /* 위젯들을 세로로 쌓음 */
+        align-items: center;
+        /* 위젯들을 가로 중앙으로 정렬 */
+        justify-content: center;
+        /* 위젯들을 세로 중앙으로 정렬 */
+        flex-grow: 1;
+        /* 컨테이너 내에서 사용 가능한 모든 공간을 차지하도록 함 */
+        width: 100%;
+        /* 부모 너비에 꽉 차게 */
+        padding: 20px;
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+        background-color: #fff;
+        /* 디버깅용 배경색 */
+    }
+
+    /* 위젯 (b:widget) 스타일 */
+    .main-content>.widget {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        /* 위젯들을 세로로 쌓음 */
+        margin-bottom: 20px;
+        /* 위젯 간 간격 */
+        width: 100%;
+        /* 위젯이 부모의 너비를 꽉 채우도록 */
+        text-align: center;
+        /* 위젯 내부 텍스트 중앙 정렬 */
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+    }
+
+    /* 마지막 위젯은 하단 마진 제거 */
+    .main-content>.widget:last-child {
+        margin-bottom: 0;
+    }
+
+    .ad-area {
+        margin-bottom: 20px;
+    }
+
+    /* 공통 */
+    .item {
+        text-align: left;
+    }
+
+    .line {
+        padding-bottom: 2px;
+    }
+
+    .title-white {
+        color: white;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .h3-title-black {
+        color: #222831;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .title-black {
+        color: #222831;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .content-white {
+        color: white;
+        font-size: 1rem;
+    }
+
+    .content-black {
+        color: #222831;
+        font-size: 1rem;
+    }
+
+    .content-grey {
+        color: grey;
+        font-size: 1rem;
+    }
+
+    .modern-list {
+        list-style: none;
+        margin: 20px 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+    }
+
+    .modern-list li {
+        margin-bottom: 12px;
+        padding: 10px 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        display: flex;
+        /* 아이콘과 텍스트를 나란히 정렬 */
+        align-items: center;
+        /* 세로 중앙 정렬 */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        /* 은은한 그림자 */
+        transition: background-color 0.3s ease;
+    }
+
+    .modern-list li:hover {
+        background-color: #e0f2f7;
+        /* 호버 시 배경색 변경 */
+    }
+
+    .modern-list .icon {
+        font-size: 1.2em;
+        color: #28a745;
+        /* 아이콘 색상 */
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    .home-link {
+        display: none;
+    }
+
+
+    .back-blue-color-1 { background: #113F67; }
+    .back-blue-color-2 { background: #34699A; }
+    .back-blue-color-3 { background: #58A0C8; }
+    .back-blue-color-4 { background: #77BEF0; }
+
+    .back-green-color-1 { background: #3E5F44; } 
+    .back-green-color-2 { background: #4A9782; }
+    .back-green-color-3 { background: #5E936C; }    
+    .back-green-color-4 { background: #8ABB6C; }
+
+    .back-red-color-1 { background: #AF3E3E; } 
+    .back-red-color-2 { background: #CD5656; }
+    .back-red-color-3 { background: #DA6C6C; }
+    .back-red-color-4 { background: #FF9898; }
+
+    /* 카드 박스 */
+    .card-box {
+        display: flex;
+        flex-direction: column;
+        /* 위젯들을 세로로 쌓음 */
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+        margin-bottom: 30px;
+    }
+
+    .card-body-column-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .card-body-column-1 {
+        display: grid;
+        grid-template-columns: 100%;
+        gap: 10px;
+    }
+
+    .card-button {
+        border-radius: 25px;
+        height: 88px;
+        padding: 20px;
+    }
+
+    .card-link {
+        text-decoration: none;
+        /* 밑줄 제거 */
+        color: inherit;
+        /* 부모 요소의 글자색 상속 */
+        display: block;
+        /* 카드 전체를 클릭 가능하게 만들기 위해 블록 요소로 */
+        width: 100%;
+        /* 부모 너비를 채워서 클릭 영역 확대 */
+    }
+
+    /* 호버 효과 (선택 사항) */
+    .card-link:hover .card-button {
+        transform: scale(1.02);
+        /* 약간 위로 떠오르는 효과 */
+        transition: all 0.3s ease;
+        /* 부드러운 전환 효과 */
+    }
+
+    .card-item-icon {
+        text-align: right;
+        margin-top: -34px;
+    }
+
+    .card-desc-area {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 30px;
+        border: 1px solid #e6e6e6;
+        margin-bottom: 30px;
+    }
+
+    .card-desc {
+        padding-bottom: 10px;
+    }
+
+    /* 디스크립션 박스 */
+    .desc-box {
+        display: flex;
+        flex-direction: column;
+        /* 위젯들을 세로로 쌓음 */
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+        background: #e7f0ff;
+        margin-bottom: 20px;
+        padding: 30px;
+    }
+
+    .item-icon {
+        text-align: right;
+        margin-top: -17px;
+    }
+
+    /* 768px보다 작은 화면에 대한 스타일 (Tablet & Mobile) */
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px 10px;
+            /* 태블릿에서는 양쪽 패딩을 약간 줄임 */
+        }
+
+        #header,
+        #footer {
+            padding: 15px 10px;
+            /* 헤더/푸터 패딩 조정 */
+        }
+
+        .main-content {
+            padding: 15px;
+        }
+
+        .home-link {
+            display: none;
+        }
+    }
+
+    /* 480px보다 작은 화면에 대한 스타일 (Mobile) */
+    @media (max-width: 480px) {
+        .container {
+            max-width: 100%;
+            /* 모바일에서는 화면 전체 너비를 사용 (단, 좌우 패딩은 유지) */
+            padding: 0 5px;
+            /* 모바일에서는 양쪽 패딩을 더 줄임 */
+        }
+
+        #header,
+        #footer {
+            padding: 0 5px;
+            /* 헤더/푸터 패딩 조정 */
+        }
+
+        .main-content {
+            padding: 0 20px 20px;
+        }
+
+        /* 모바일에서 글꼴 크기 등 조절 예시 */
+        body {
+            font-size: 14px;
+        }
+
+        .home-link {
+            display: none;
+        }
+
+        .card-body-column-2 .card-link .card-button {
+            padding: 16px;
+        }
+    }
+
+
+
+
+    .simple-post {
+        max-width: 720px;
+        margin: 3rem auto;
+        padding: 2rem;
+        font-family: 'Noto Sans KR', sans-serif;
+        background: #fff;
+    }
+
+    .simple-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .simple-body {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #333;
+    }
+
+    /* 기존 댓글, 공유버튼 등 숨기기 (혹시 상속된 경우 대비) */
+    .post-footer,
+    .comments,
+    .comments-section,
+    .share-buttons,
+    .post-meta,
+    .post-tags,
+    .feed-links,
+    .post-labels,
+    .post-author,
+    .post-timestamp,
+    .post-comment-link {
+        display: none !important;
+    }
+
+
+    /* "자세한 내용 보기" 관련 요소 숨기기 */
+    .jump-link,
+    .jump-link a,
+    .read-more,
+    .post-snippet,
+    .more-link,
+    .continue-reading {
+        display: none !important;
+    }
+
+    .material-symbols-outlined {
+        color: #023667;
+        /* 아이콘 색상 (예시: 녹색) */
+        font-variation-settings:
+            'FILL' 1,
+            /* 아이콘을 채움 (1로 설정) */
+            'wght' 800,
+            /* 두께 (기본값) */
+            'GRAD' 0,
+            /* 명암 (기본값) */
+            'opsz' 48;
+        /* 광학 크기 (기본값) */
+    }
+
+
+    .simple-post {
+        max-width: 720px;
+        margin: 3rem auto;
+        padding: 2rem;
+        font-family: 'Noto Sans KR', sans-serif;
+        background: #fff;
+    }
+
+    .simple-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .simple-body {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #333;
+    }
+
+    /* 기존 댓글, 공유버튼 등 숨기기 (혹시 상속된 경우 대비) */
+    .post-footer,
+    .comments,
+    .comments-section,
+    .share-buttons,
+    .post-meta,
+    .post-tags,
+    .feed-links,
+    .post-labels,
+    .post-author,
+    .post-timestamp,
+    .post-comment-link {
+        display: none !important;
+    }
+
+
+    /* "자세한 내용 보기" "이전게시물" 관련 요소 숨기기 */
+    .jump-link,
+    .jump-link a,
+    .read-more,
+    .post-snippet,
+    .more-link,
+    .blog-pager-newer-link,
+    .blog-pager-older-link,
+    .continue-reading {
+        display: none !important;
+    }
+
+    .date-header {
+        display: none;
+    }
+
+    .post-title.entry-title {
+        padding: 0 0 20px 0;
+    }
+
+    .home-icon {
+        color: white;
+    }
+
+    .content-h1 {
+        font-size: 1.5rem;
+        color: #222831;
+        border-bottom: 2px solid #4a90e2;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .content-h2 {
+        font-size: 1.3rem;
+        color: #2c3e50;
+        /* h2 색상 추가 (기존에는 body에서 상속) */
+        padding-bottom: 20px;
+    }
+
+    .content-h3 {
+        color: #2c3e50;
+        /* h3 색상 추가 */
+        margin-bottom: 10px;
+        /* h3 하단 여백 */
+    }
+
+    .content-wrapper {
+        text-align: left;
+    }
+
+    .content-desc {
+        margin-bottom: 20px;
+    }
+
+    /* sub-wrapper 스타일 */
+    .sub-wrapper {
+        border: 1px solid #e6e6e6;
+        border-radius: 12px;
+        /* 살짝 둥근 모서리 */
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #fff;
+        /* 내용이 깔끔하게 보이도록 흰색 배경 */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        /* 은은한 그림자 */
+    }
+
+    /* --- ul, li 디자인 개선 --- */
+    /* 기본 ul 스타일 (sub-ul에도 적용) */
+    ul {
+        list-style-type: none;
+        /* 기본 마커 제거 */
+        padding-left: 0;
+        /* 기본 패딩 제거 */
+        margin-left: 0;
+    }
+
+    /* .sub-ul 바로 아래 li에 대한 스타일 (주요 리스트 항목) */
+    .sub-ul>li {
+        padding-left: 1.8em;
+        /* 마커 공간 확보 */
+        position: relative;
+        margin-bottom: 10px;
+        /* 리스트 항목 간 간격 */
+        line-height: 1.5;
+        /* 텍스트 줄 간격 */
+    }
+
+    /* .sub-ul 바로 아래 li의 커스텀 마커 (체크 아이콘) */
+    .sub-ul>li::before {
+        content: 'check_circle';
+        /* Material Symbols 아이콘 이름 */
+        font-family: 'Material Symbols Outlined';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 1.1em;
+        /* 아이콘 크기 */
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+        position: absolute;
+        left: 0;
+        /* ul li의 padding-left와 맞춰 조절 */
+        color: #4CAF50;
+        /* 아이콘 색상 */
+        top: 0.25em;
+        /* 텍스트 세로 정렬 미세 조정 */
+    }
+
+    /* 중첩된 ul에 대한 스타일 (들여쓰기 및 마커 변경) */
+    .sub-ul ul {
+        margin-top: 5px;
+        /* 상위 li와의 간격 */
+        margin-bottom: 5px;
+        /* 하위 li 끝과의 간격 */
+        padding-left: 1.5em;
+        /* 중첩될 때 추가 들여쓰기 */
+        list-style-type: disc;
+        /* 기본 원형 마커 사용 */
+    }
+
+    /* 중첩된 ul 안의 li에 대한 스타일 */
+    .sub-ul ul li {
+        margin-bottom: 5px;
+        /* 중첩된 항목 간 간격 */
+        line-height: 1.4;
+        /* 줄 간격 조절 */
+    }
+
+    /* 중첩된 ul 안의 li에는 커스텀 마커를 제거 (기본 마커 사용) */
+    .sub-ul ul li::before {
+        content: none;
+    }
+
+    /* li.note 스타일 (주의사항 강조) */
+    li.note {
+        background-color: #fff3cd;
+        /* 경고 느낌의 배경색 */
+        border-left: 5px solid #ffc107;
+        /* 경고 느낌의 테두리색 */
+        padding: 10px 15px;
+        margin: 15px 0;
+        color: #664d03;
+        border-radius: 4px;
+        font-weight: bold;
+        /* note 항목에는 마커 제거 */
+        list-style-type: none;
+        /* 자체적으로 마커 제거 */
+        padding-left: 15px;
+        /* 왼쪽에 5px border-left 있으니 패딩은 15px로 조정 */
+    }
+
+    li.note strong {
+        color: #664d03;
+        /* note 내부 strong 태그 색상 유지 */
+    }
+
+    /* note 항목이 sub-ul 내부에 있을 때 ::before 마커 제거 */
+    .sub-ul li.note::before {
+        content: none;
+    }
+
+    .simple-button {
+        border-radius: 25px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .simple-button-white {
+        color: white;
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* 호버 효과 (선택 사항) */
+    .card-link:hover .simple-button {
+        transform: scale(1.02);
+        /* 약간 위로 떠오르는 효과 */
+        transition: all 0.3s ease;
+        /* 부드러운 전환 효과 */
+    }
+
+    /* 테이블 스타일 */
+    .table-container {
+        overflow-x: auto;
+        margin-bottom: 20px;
+    }
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9em;
+        min-width: 400px;
+        text-align: center;
+    }
+    .styled-table th, .styled-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        vertical-align: middle;
+    }
+    .styled-table thead tr {
+        background-color: #4a90e2;
+        color: #ffffff;
+        text-align: center;
+        font-weight: bold;
+    }
+    .styled-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+    .styled-table tbody tr:last-of-type {
+        border-bottom: 2px solid #4a90e2;
+    }
+    .styled-table tbody tr.active-row {
+        font-weight: bold;
+        color: #009879;
+    }    
+]]>
+</b:skin>
+
+<body>
+    <!-- Header -->
+    <header class='header'>
+        <div class='back-button-container'></div>
+        <div>
+            <h3 class='h3-title-black'>
+                <data:blog.title />
+            </h3>
+        </div>
+        <div class='header-right-placeholder'></div>
+    </header>
+    <!-- Main Layout -->
+    <!-- Main Layout -->
+    <div class='container' id="main-container2">
+        <b:section class='main-content' id='main2'>
+            <b:widget id='HTML1' locked='false' title='main' type='HTML' version='2' visible='true'>
+                <b:widget-settings>
+                    <b:widget-setting name='content' />
+                </b:widget-settings>
+                <b:includable id='main'>
+                </b:includable>
+            </b:widget>
+        </b:section>
+    </div>
+    <div class='container' id="main-container">
+        <b:section class='main-content' id='main'>
+            <b:widget id='Blog1' locked='false' title='블로그 게시물' type='Blog' version='1'>
+                <b:includable id='main1'>
+                    <!-- 여기에 실제 구조 -->
+                    <b:include data='data:posts' name='posts' />
+                    <b:include name='super.main' />
+                </b:includable>
+                <b:includable id='posts' var='posts'>
+                    <ul class='posts hierarchy'>
+                        <b:loop values='data:posts' var='post'>
+                            <script class='post-json' type='application/json'>
+                            {
+                                "title": "<data:post.title.jsonEscaped/>",
+                                "body": "<data:post.body.jsonEscaped/>",
+                                "url": "<data:post.url.jsonEscaped/>",
+                                "labels": [
+                                <b:loop values='data:post.labels' var='label'>
+                                    "<data:label.name.jsonEscaped/>"<b:if cond='data:label.isLast != "true"'>,</b:if>
+                                </b:loop>
+                                ]
+                            }
+                            </script>
+                        </b:loop>
+                    </ul>
+                </b:includable>
+            </b:widget>
+        </b:section>
+    </div>
+    <!-- Footer -->
+    <footer id='footer'>
+        <div>&#169;
+            <data:blog.title /> All rights reserved.
+        </div>
+    </footer>
+    <script>
+        $(document).ready(function () {
+            const currentURI = window.location.pathname;
+            console.log("현재 URI (경로):", currentURI);
+            if (currentURI === "/") {
+                $("#Blog1").hide();
+                $("#main-container2").show();
+                $(".back-button-container").empty(); // "이전" 버튼 컨테이너 비움
+            } else {
+                $("#Blog1").show();
+                $("#main-container2").hide();
+
+                $(".back-button-container").html(`
+                    <a href="https://developwhale.blogspot.com/" class="back-button">
+                        <span class="material-symbols-outlined">arrow_back_ios</span>
+                        이전
+                    </a>
+                `);
+            }
+        });
+    </script>
+</body>
+
+</html>
