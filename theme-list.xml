@@ -481,8 +481,8 @@
         </div>
         <div class='nav-container'>
             <ul class="navbar">
-                <li><a href="#">홈</a></li>
                 <li class="active"><a href="#">카테고리</a></li>
+                <li><a href="#">카테고리</a></li>
             </ul>
         </div>
     </header>
@@ -506,28 +506,26 @@
                         </script>
                     </b:loop>
 
-                    <b:if cond='data:view.isHomepage'>
-                        <div class='desc-box'>
-                            <div class='item desc-title-primary'>DESC 제목</div>
-                            <div class='item content-secondary'>설명글1
-                                <br />설명글2
-                                <br />설명글3
-                            </div>
-                            <div class='item-icon material-symbols-outlined'>train</div>
+                    <div class='desc-box'>
+                        <div class='item desc-title-primary'>DESC 제목</div>
+                        <div class='item content-secondary'>설명글1
+                            <br />설명글2
+                            <br />설명글3
                         </div>
-                        <div class='card-box'>
-                            <div class='item title-primary'><span class=""></span>타이틀</div>
-                            <div class='item card-body-column-2' id='req'>
-                            </div>
+                        <div class='item-icon material-symbols-outlined'>train</div>
+                    </div>
+                    <div class='card-box'>
+                        <div class='item title-primary'><span class=""></span>타이틀</div>
+                        <div class='item card-body-column-2' id='req'>
                         </div>
-                        <div class='ad-area'>
+                    </div>
+                    <div class='ad-area'>
+                    </div>
+                    <div class='card-box'>
+                        <div class='item title-primary'><span class=""></span>타이틀</div>
+                        <div class='item card-body-column-2' id='down'>
                         </div>
-                        <div class='card-box'>
-                            <div class='item title-primary'><span class=""></span>타이틀</div>
-                            <div class='item card-body-column-2' id='down'>
-                            </div>
-                        </div>                        
-                    </b:if>
+                    </div>                        
                 </b:includable>
 
             </b:widget>
@@ -560,40 +558,40 @@
 
             const p1 = posts.filter(f => f.labels[0] === "신청방법").slice().reverse();
             $(p1).each(function (index, item) {
-                // 1. [link]...[/link] 추출
                 const linkMatch = item.body.match(/\[link\](.*?)\[\/link\]/i);
                 const link = linkMatch ? linkMatch[1] : "#";
 
-                // 2. 본문에서 [link] 제거
                 const cleanedBody = item.body.replace(/\[link\](.*?)\[\/link\]/i, "").trim();
 
                 const colorNo = index % 10;
                 const newCard = `
-                    <div class='card-button card-button-color-${colorNo}'>
-                        <div class='title-white'>${$(this)[0].title}</div>
-                        <div class='content-white'>${cleanedBody}</div>
-                        <div class='card-icon material-symbols-outlined'>arrow_circle_right</div>
-                    </div>
+                    <a href='${link}' class='card-link'>
+                        <div class='card-button card-button-color-${colorNo}'>
+                            <div class='title-white'>${$(this)[0].title}</div>
+                            <div class='content-white'>${cleanedBody}</div>
+                            <div class='card-icon material-symbols-outlined'>arrow_circle_right</div>
+                        </div>
+                    </a>
                 `;
                 $("#req").append(newCard);
             });
 
             const p2 = posts.filter(f => f.labels[0] === "다운로드").slice().reverse();
             $(p2).each(function (index, item) {
-                // 1. [link]...[/link] 추출
                 const linkMatch = item.body.match(/\[link\](.*?)\[\/link\]/i);
                 const link = linkMatch ? linkMatch[1] : "#";
 
-                // 2. 본문에서 [link] 제거
                 const cleanedBody = item.body.replace(/\[link\](.*?)\[\/link\]/i, "").trim();
 
                 const colorNo = index % 10;
                 const newCard = `
-                    <div class='card-button card-button-color-${colorNo}'>
-                        <div class='title-white'>${$(this)[0].title}</div>
-                        <div class='content-white'>${cleanedBody}</div>
-                        <div class='card-icon material-symbols-outlined'>arrow_circle_right</div>
-                    </div>
+                    <a href='${link}' class='card-link'>
+                        <div class='card-button card-button-color-${colorNo}'>
+                            <div class='title-white'>${$(this)[0].title}</div>
+                            <div class='content-white'>${cleanedBody}</div>
+                            <div class='card-icon material-symbols-outlined'>arrow_circle_right</div>
+                        </div>
+                    </a>
                 `;
                 $("#down").append(newCard);
             });
