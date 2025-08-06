@@ -11,13 +11,72 @@
         <data:view.title.escaped />
     </title>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js' />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <b:skin>
     <![CDATA[
 
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
+    :root {
+        --primary-color: #555879;
+        --secondary-color: #98A1BC;
+        --background-color: #FFFFF;
+        --primary-text-color: #374259;
+        --secondary-text-color: #545B77;
+        --white-text-color: #FFFFFF;
+        --desc-color: #FBFBFB;
+    }
+
+    /* 블로그 스팟 숨김 */
+    /* 기존 댓글, 공유버튼 등 숨기기 (혹시 상속된 경우 대비) */
+    .post-footer,
+    .comments,
+    .comments-section,
+    .share-buttons,
+    .post-meta,
+    .post-tags,
+    .feed-links,
+    .post-labels,
+    .post-author,
+    .post-timestamp,
+    .post-comment-link {
+        display: none !important;
+    }
+
+
+    /* "자세한 내용 보기" 관련 요소 숨기기 */
+    .jump-link,
+    .jump-link a,
+    .read-more,
+    .post-snippet,
+    .more-link,
+    .continue-reading {
+        display: none !important;
+    }
+
+    .date-header {
+        display: none;
+    }
+
+    .post-title.entry-title {
+        padding: 0 0 20px 0;
+    }
+
+    .home-icon {
+        color: white;
+    }
+    
+    .home-link {
+        display: none;
+    }
+
+    .back-red-color-1 { background: #AF3E3E; } 
+    .back-red-color-2 { background: #CD5656; }
+    .back-red-color-3 { background: #DA6C6C; }
+
+        
     /* 기본 스타일: 모든 화면에 적용 */
     * {
         margin: 0;
@@ -27,7 +86,7 @@
     }
 
     body {
-        margin: 0;
+        margin-top: 60px;
         padding: 0;
         font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', Arial, sans-serif;
         box-sizing: border-box;
@@ -38,8 +97,9 @@
         /* body를 flex 컨테이너로 설정 */
         flex-direction: column;
         /* 자식 요소들을 세로로 정렬 (header, .container, footer) */
-        -webkit-tap-highlight-color: transparent;
-        /* 터치하이라이트 제거 */
+
+        background-color: var(--background-color);
+        color: var(--primary-text-color);
     }
 
     #header,
@@ -59,9 +119,10 @@
     }
 
     .header {
-        position: sticky; /* 스크롤 시 상단에 고정 */
+        position: fixed; /* 스크롤 시 상단에 고정 */
         top: 0; /* 상단에 붙임 */
-        width: 100%;
+        left: 50%; /* 가로 중앙 정렬을 위한 설정 */
+        transform: translateX(-50%); /* 가로 중앙 정렬을 위한 설정 */
         max-width: 768px; /* 추가: 헤더의 최대 가로 길이 768px */
         margin: 0 auto; /* 추가: 헤더를 가운데 정렬 */
         background-color: #fff; /* 배경색을 주어 아래 내용이 비치지 않게 함 */
@@ -69,16 +130,22 @@
         display: flex; /* 기존 flex 속성 유지 */
         justify-content: space-between; /* 아이템들을 양쪽 끝으로 정렬 */
         align-items: center;
+        width: 100%;
         height: 60px;
         padding: 0 15px; /* 양쪽 패딩 추가 */
         box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
+    }
+
+    .h3-title-primary {
+        color: var(--primary-text-color);
+        font-weight: bold;
     }
 
     .back-button {
         display: flex;
         align-items: center;
         text-decoration: none;
-        color: #222831; /* 헤더 텍스트와 동일하게 */
+        color: var(--primary-text-color);
         font-weight: bold;
         font-size: 1rem;
         padding: 8px 12px;
@@ -94,7 +161,7 @@
     .back-button .material-symbols-outlined {
         font-size: 1.2rem;
         margin-right: 5px;
-        color: #222831; /* 아이콘 색상도 동일하게 */
+        color: var(--primary-text-color);
         font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24; /* 아이콘 설정 조정 */
     }    
 
@@ -112,7 +179,6 @@
         flex-shrink: 0; /* 더 이상 작아지지 않음 */
         flex-basis: auto; /* 콘텐츠 너비에 맞춤 */
         text-align: center; /* 타이틀 텍스트 자체를 가운데 정렬 */
-        /* background-color: lightcoral; /* 디버깅용 */ */
     }
 
     /* 전체 컨테이너에 최대 가로 길이 적용 및 중앙 정렬 */
@@ -138,7 +204,6 @@
         /* 가로 중앙 정렬 (내부 위젯이 하나일 경우 유용) */
     }
 
-    /* 메인 콘텐츠 영역 (b:section id="main") */
     .main-content {
         display: flex;
         /* 이 섹션도 Flex 컨테이너로 설정 */
@@ -159,211 +224,6 @@
         /* 디버깅용 배경색 */
     }
 
-    /* 위젯 (b:widget) 스타일 */
-    .main-content>.widget {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        /* 위젯들을 세로로 쌓음 */
-        margin-bottom: 20px;
-        /* 위젯 간 간격 */
-        width: 100%;
-        /* 위젯이 부모의 너비를 꽉 채우도록 */
-        text-align: center;
-        /* 위젯 내부 텍스트 중앙 정렬 */
-        box-sizing: border-box;
-        /* 패딩과 보더가 너비에 포함되도록 */
-    }
-
-    /* 마지막 위젯은 하단 마진 제거 */
-    .main-content>.widget:last-child {
-        margin-bottom: 0;
-    }
-
-    .ad-area {
-        margin-bottom: 20px;
-    }
-
-    /* 공통 */
-    .item {
-        text-align: left;
-    }
-
-    .line {
-        padding-bottom: 2px;
-    }
-
-    .title-white {
-        color: white;
-        font-size: 1.1rem;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    .h3-title-black {
-        color: #222831;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    .title-black {
-        color: #222831;
-        font-size: 1.1rem;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    .content-white {
-        color: white;
-        font-size: 1rem;
-    }
-
-    .content-black {
-        color: #222831;
-        font-size: 1rem;
-    }
-
-    .content-grey {
-        color: grey;
-        font-size: 1rem;
-    }
-
-    .modern-list {
-        list-style: none;
-        margin: 20px 0;
-        padding: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #333;
-    }
-
-    .modern-list li {
-        margin-bottom: 12px;
-        padding: 10px 15px;
-        background-color: #f9f9f9;
-        border-radius: 5px;
-        display: flex;
-        /* 아이콘과 텍스트를 나란히 정렬 */
-        align-items: center;
-        /* 세로 중앙 정렬 */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        /* 은은한 그림자 */
-        transition: background-color 0.3s ease;
-    }
-
-    .modern-list li:hover {
-        background-color: #e0f2f7;
-        /* 호버 시 배경색 변경 */
-    }
-
-    .modern-list .icon {
-        font-size: 1.2em;
-        color: #28a745;
-        /* 아이콘 색상 */
-        margin-right: 10px;
-        font-weight: bold;
-    }
-
-    .home-link {
-        display: none;
-    }
-
-
-    .back-blue-color-1 { background: #113F67; }
-    .back-blue-color-2 { background: #34699A; }
-    .back-blue-color-3 { background: #58A0C8; }
-    .back-blue-color-4 { background: #77BEF0; }
-
-    .back-green-color-1 { background: #3E5F44; } 
-    .back-green-color-2 { background: #4A9782; }
-    .back-green-color-3 { background: #5E936C; }    
-    .back-green-color-4 { background: #8ABB6C; }
-
-    .back-red-color-1 { background: #AF3E3E; } 
-    .back-red-color-2 { background: #CD5656; }
-    .back-red-color-3 { background: #DA6C6C; }
-    .back-red-color-4 { background: #FF9898; }
-
-    /* 카드 박스 */
-    .card-box {
-        display: flex;
-        flex-direction: column;
-        /* 위젯들을 세로로 쌓음 */
-        box-sizing: border-box;
-        /* 패딩과 보더가 너비에 포함되도록 */
-        margin-bottom: 30px;
-    }
-
-    .card-body-column-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-    }
-
-    .card-body-column-1 {
-        display: grid;
-        grid-template-columns: 100%;
-        gap: 10px;
-    }
-
-    .card-button {
-        border-radius: 25px;
-        height: 88px;
-        padding: 20px;
-    }
-
-    .card-link {
-        text-decoration: none;
-        /* 밑줄 제거 */
-        color: inherit;
-        /* 부모 요소의 글자색 상속 */
-        display: block;
-        /* 카드 전체를 클릭 가능하게 만들기 위해 블록 요소로 */
-        width: 100%;
-        /* 부모 너비를 채워서 클릭 영역 확대 */
-    }
-
-    /* 호버 효과 (선택 사항) */
-    .card-link:hover .card-button {
-        transform: scale(1.02);
-        /* 약간 위로 떠오르는 효과 */
-        transition: all 0.3s ease;
-        /* 부드러운 전환 효과 */
-    }
-
-    .card-item-icon {
-        text-align: right;
-        margin-top: -34px;
-    }
-
-    .card-desc-area {
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-        padding: 30px;
-        border: 1px solid #e6e6e6;
-        margin-bottom: 30px;
-    }
-
-    .card-desc {
-        padding-bottom: 10px;
-    }
-
-    /* 디스크립션 박스 */
-    .desc-box {
-        display: flex;
-        flex-direction: column;
-        /* 위젯들을 세로로 쌓음 */
-        box-sizing: border-box;
-        /* 패딩과 보더가 너비에 포함되도록 */
-        background: #e7f0ff;
-        margin-bottom: 20px;
-        padding: 30px;
-    }
-
-    .item-icon {
-        text-align: right;
-        margin-top: -17px;
-    }
 
     /* 768px보다 작은 화면에 대한 스타일 (Tablet & Mobile) */
     @media (max-width: 768px) {
@@ -379,7 +239,7 @@
         }
 
         .main-content {
-            padding: 15px;
+            padding: 0 15px;
         }
 
         .home-link {
@@ -418,56 +278,178 @@
         .card-body-column-2 .card-link .card-button {
             padding: 16px;
         }
-    }
+    }    
 
-
-
-
-    .simple-post {
-        max-width: 720px;
-        margin: 3rem auto;
-        padding: 2rem;
-        font-family: 'Noto Sans KR', sans-serif;
-        background: #fff;
-    }
-
-    .simple-title {
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin-bottom: 2rem;
+    .main-content>.widget {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        /* 위젯들을 세로로 쌓음 */
+        margin-bottom: 20px;
+        /* 위젯 간 간격 */
+        width: 100%;
+        /* 위젯이 부모의 너비를 꽉 채우도록 */
         text-align: center;
+        /* 위젯 내부 텍스트 중앙 정렬 */
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
     }
 
-    .simple-body {
+    /* 마지막 위젯은 하단 마진 제거 */
+    .main-content>.widget:last-child {
+        margin-bottom: 0;
+    }
+
+    .ad-area {
+        margin-bottom: 20px;
+    }
+
+    /* 공통 */
+    .item {
+        text-align: left;
+    }
+
+    .line {
+        padding-bottom: 2px;
+    }
+
+    .title-black {
+        color: var(--primary-text-color);
         font-size: 1.1rem;
-        line-height: 1.8;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .content-grey {
+        color: var(--secondary-text-color);
+        font-size: 1rem;
+    }
+
+    .modern-list {
+        list-style: none;
+        margin: 20px 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #333;
     }
 
-    /* 기존 댓글, 공유버튼 등 숨기기 (혹시 상속된 경우 대비) */
-    .post-footer,
-    .comments,
-    .comments-section,
-    .share-buttons,
-    .post-meta,
-    .post-tags,
-    .feed-links,
-    .post-labels,
-    .post-author,
-    .post-timestamp,
-    .post-comment-link {
-        display: none !important;
+    .modern-list li {
+        margin-bottom: 12px;
+        padding: 10px 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        display: flex;
+        /* 아이콘과 텍스트를 나란히 정렬 */
+        align-items: center;
+        /* 세로 중앙 정렬 */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        /* 은은한 그림자 */
+        transition: background-color 0.3s ease;
     }
 
+    .modern-list li:hover {
+        background-color: #e0f2f7;
+        /* 호버 시 배경색 변경 */
+    }
 
-    /* "자세한 내용 보기" 관련 요소 숨기기 */
-    .jump-link,
-    .jump-link a,
-    .read-more,
-    .post-snippet,
-    .more-link,
-    .continue-reading {
-        display: none !important;
+    .modern-list .icon {
+        font-size: 1.2em;
+        color: #28a745;
+        /* 아이콘 색상 */
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    /* 카드 박스 */
+    .card-box {
+        display: flex;
+        flex-direction: column;
+        /* 위젯들을 세로로 쌓음 */
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+        margin-bottom: 20px;
+    }
+
+    .card-body-column-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .card-body-column-1 {   
+        display: grid;
+        grid-template-columns: 100%;
+        gap: 10px;
+    }
+
+    .card-button {
+        border-radius: 12px;
+        height: 120px;
+        padding: 20px;
+        position: relative;
+
+        /* 머터리얼 디자인의 "Level 1" 그림자 */
+        box-shadow:
+            0 2px 5px 0 rgba(0, 0, 0, 0.1),
+            0 2px 10px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .card-link {
+        text-decoration: none;
+        /* 밑줄 제거 */
+        color: inherit;
+        /* 부모 요소의 글자색 상속 */
+        display: block;
+        /* 카드 전체를 클릭 가능하게 만들기 위해 블록 요소로 */
+        height: 100%;
+        /* 부모 높이를 채워서 클릭 영역 확대 */
+        width: 100%;
+        /* 부모 너비를 채워서 클릭 영역 확대 */
+    }
+
+    .card-icon {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        color: white;
+        font-size: 2rem;
+    }
+
+    /* 호버 효과 */
+    .card-button:hover {
+        transform: scale(1.01);
+        /* 약간 위로 떠오르는 효과 */
+        transition: all 0.3s ease;
+        /* 부드러운 전환 효과 */
+        box-shadow:
+            0 8px 10px 1px rgba(0, 0, 0, 0.14),
+            0 3px 14px 2px rgba(0, 0, 0, 0.12),
+            0 5px 5px -3px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 디스크립션 박스 */
+    .desc-box {
+        position: relative;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        /* 위젯들을 세로로 쌓음 */
+        box-sizing: border-box;
+        /* 패딩과 보더가 너비에 포함되도록 */
+        background: var(--desc-color);
+        margin-bottom: 20px;
+        padding: 30px;
+        box-shadow:
+            0 2px 5px 0 rgba(0, 0, 0, 0.1),
+            0 2px 10px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .item-icon {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        color: grey;
+        font-size: 2rem;
     }
 
     .material-symbols-outlined {
@@ -484,71 +466,9 @@
         /* 광학 크기 (기본값) */
     }
 
-
-    .simple-post {
-        max-width: 720px;
-        margin: 3rem auto;
-        padding: 2rem;
-        font-family: 'Noto Sans KR', sans-serif;
-        background: #fff;
-    }
-
-    .simple-title {
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin-bottom: 2rem;
-        text-align: center;
-    }
-
-    .simple-body {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: #333;
-    }
-
-    /* 기존 댓글, 공유버튼 등 숨기기 (혹시 상속된 경우 대비) */
-    .post-footer,
-    .comments,
-    .comments-section,
-    .share-buttons,
-    .post-meta,
-    .post-tags,
-    .feed-links,
-    .post-labels,
-    .post-author,
-    .post-timestamp,
-    .post-comment-link {
-        display: none !important;
-    }
-
-
-    /* "자세한 내용 보기" "이전게시물" 관련 요소 숨기기 */
-    .jump-link,
-    .jump-link a,
-    .read-more,
-    .post-snippet,
-    .more-link,
-    .blog-pager-newer-link,
-    .blog-pager-older-link,
-    .continue-reading {
-        display: none !important;
-    }
-
-    .date-header {
-        display: none;
-    }
-
-    .post-title.entry-title {
-        padding: 0 0 20px 0;
-    }
-
-    .home-icon {
-        color: white;
-    }
-
     .content-h1 {
         font-size: 1.5rem;
-        color: #222831;
+        color: var(--primary-text-color);
         border-bottom: 2px solid #4a90e2;
         padding-bottom: 10px;
         margin-bottom: 20px;
@@ -556,13 +476,13 @@
 
     .content-h2 {
         font-size: 1.3rem;
-        color: #2c3e50;
+        color: var(--primary-text-color);
         /* h2 색상 추가 (기존에는 body에서 상속) */
         padding-bottom: 20px;
     }
 
     .content-h3 {
-        color: #2c3e50;
+        color: var(--primary-text-color);
         /* h3 색상 추가 */
         margin-bottom: 10px;
         /* h3 하단 여백 */
@@ -669,7 +589,7 @@
         /* 경고 느낌의 테두리색 */
         padding: 10px 15px;
         margin: 15px 0;
-        color: #664d03;
+        color: var(--primary-text-color);
         border-radius: 4px;
         font-weight: bold;
         /* note 항목에는 마커 제거 */
@@ -680,7 +600,7 @@
     }
 
     li.note strong {
-        color: #664d03;
+        color: var(--primary-text-color);
         /* note 내부 strong 태그 색상 유지 */
     }
 
@@ -690,9 +610,12 @@
     }
 
     .simple-button {
-        border-radius: 25px;
+        border-radius: 12px;
         padding: 20px;
         margin-bottom: 20px;
+        box-shadow:
+            0 2px 5px 0 rgba(0, 0, 0, 0.1),
+            0 2px 10px 0 rgba(0, 0, 0, 0.05);
     }
 
     .simple-button-white {
@@ -751,7 +674,7 @@
     <header class='header'>
         <div class='back-button-container'></div>
         <div>
-            <h3 class='h3-title-black'>
+            <h3 class='h3-title-primary'>
                 <data:blog.title />
             </h3>
         </div>
