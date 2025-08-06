@@ -35,6 +35,7 @@
     .comments,
     .comments-section,
     .share-buttons,
+    .post-header,
     .post-meta,
     .post-tags,
     .feed-links,
