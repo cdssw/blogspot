@@ -488,9 +488,9 @@
     </header>
     <!-- Main Layout -->
     <div class='container' id="main-content-wrapper">
-        <b:section id='main' class='main-content'>
+        <b:section id='top' class='main-content'>
             <b:widget id='Blog1' locked='false' title='블로그 게시물' type='Blog' version='1'>
-                <b:includable id='post'>
+                <b:includable id='main'>
                     <b:loop values='data:posts' var='post'>
                         <script class='post-json' type='application/json'>
                         {
@@ -515,14 +515,14 @@
                         <div class='item-icon material-symbols-outlined'>train</div>
                     </div>
                     <div class='card-box'>
-                        <div class='item title-primary'><span class=""></span>타이틀</div>
+                        <div class='item title-primary'>타이틀</div>
                         <div class='item card-body-column-2' id='req'>
                         </div>
                     </div>
                     <div class='ad-area'>
                     </div>
                     <div class='card-box'>
-                        <div class='item title-primary'><span class=""></span>타이틀</div>
+                        <div class='item title-primary'>타이틀</div>
                         <div class='item card-body-column-2' id='down'>
                         </div>
                     </div>                        
