@@ -11,8 +11,7 @@
         <data:view.title.escaped />
     </title>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js' />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <b:skin>
     <![CDATA[
@@ -759,19 +758,18 @@
         <div class='header-right-placeholder'></div>
     </header>
     <!-- Main Layout -->
-    <!-- Main Layout -->
-    <div class='container' id="main-container2">
-        <b:section class='main-content' id='main2'>
+    <div class='container' id="list-container">
+        <b:section class='main-content' id='list'>
             <b:widget id='HTML1' locked='false' title='main' type='HTML' version='2' visible='true'>
                 <b:widget-settings>
                     <b:widget-setting name='content' />
                 </b:widget-settings>
-                <b:includable id='main'>
+                <b:includable id='list1'>
                 </b:includable>
             </b:widget>
         </b:section>
     </div>
-    <div class='container' id="main-container">
+    <div class='container' style="display: none;" id="main-container">
         <b:section class='main-content' id='main'>
             <b:widget id='Blog1' locked='false' title='블로그 게시물' type='Blog' version='1'>
                 <b:includable id='main1'>
@@ -786,12 +784,7 @@
                             {
                                 "title": "<data:post.title.jsonEscaped/>",
                                 "body": "<data:post.body.jsonEscaped/>",
-                                "url": "<data:post.url.jsonEscaped/>",
-                                "labels": [
-                                <b:loop values='data:post.labels' var='label'>
-                                    "<data:label.name.jsonEscaped/>"<b:if cond='data:label.isLast != "true"'>,</b:if>
-                                </b:loop>
-                                ]
+                                "url": "<data:post.url.jsonEscaped/>"
                             }
                             </script>
                         </b:loop>
@@ -811,12 +804,12 @@
             const currentURI = window.location.pathname;
             console.log("현재 URI (경로):", currentURI);
             if (currentURI === "/") {
-                $("#Blog1").hide();
-                $("#main-container2").show();
+                $("#main-container").hide();
+                $("#list-container").show();
                 $(".back-button-container").empty(); // "이전" 버튼 컨테이너 비움
             } else {
-                $("#Blog1").show();
-                $("#main-container2").hide();
+                $("#main-container").show();
+                $("#list-container").hide();
 
                 $(".back-button-container").html(`
                     <a href="https://developwhale.blogspot.com/" class="back-button">
