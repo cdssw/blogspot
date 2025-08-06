@@ -61,8 +61,9 @@
         display: none;
     }
 
+    /* 제목 제거 (헤더에 추가) */
     .post-title.entry-title {
-        padding: 0 0 20px 0;
+        display: none;
     }
 
     .home-icon {
@@ -133,7 +134,7 @@
         align-items: center;
         width: 100%;
         height: 60px;
-        padding: 0 15px; /* 양쪽 패딩 추가 */
+        padding: 0 60px; /* 양쪽 패딩 추가 */
         box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
     }
 
@@ -143,16 +144,15 @@
     }
 
     .back-button {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         text-decoration: none;
         color: var(--primary-text-color);
         font-weight: bold;
         font-size: 1rem;
-        padding: 8px 12px;
+        padding: 8px 0;
         border-radius: 5px;
         transition: background-color 0.3s ease;
-        width: 80px;
     }
 
     .back-button:hover {
@@ -191,7 +191,7 @@
         /* 최대 가로 길이 768px */
         margin: 0 auto;
         /* 가운데 정렬 */
-        padding: 0 20px 15px;
+        padding: 0 20px;
         /* 양쪽에 여백 추가 (부트스트랩의 기본 .container 패딩과 유사) */
         box-sizing: border-box;
         /* 패딩과 보더가 너비에 포함되도록 */
@@ -218,7 +218,7 @@
         /* 컨테이너 내에서 사용 가능한 모든 공간을 차지하도록 함 */
         width: 100%;
         /* 부모 너비에 꽉 차게 */
-        padding: 20px;
+        padding: 0 20px;
         box-sizing: border-box;
         /* 패딩과 보더가 너비에 포함되도록 */
         background-color: #fff;
@@ -229,7 +229,7 @@
     /* 768px보다 작은 화면에 대한 스타일 (Tablet & Mobile) */
     @media (max-width: 768px) {
         .container {
-            padding: 15px 10px;
+            padding: 0 10px;
             /* 태블릿에서는 양쪽 패딩을 약간 줄임 */
         }
 
@@ -238,6 +238,10 @@
             padding: 15px 10px;
             /* 헤더/푸터 패딩 조정 */
         }
+
+        .header {
+            padding: 0 35px; /* 양쪽 패딩 추가 */
+        }        
 
         .main-content {
             padding: 0 15px;
@@ -263,8 +267,12 @@
             /* 헤더/푸터 패딩 조정 */
         }
 
+        .header {
+            padding: 0 30px; /* 양쪽 패딩 추가 */
+        }
+
         .main-content {
-            padding: 0 20px 20px;
+            padding: 0 20px;
         }
 
         /* 모바일에서 글꼴 크기 등 조절 예시 */
@@ -324,6 +332,12 @@
     .content-grey {
         color: var(--secondary-text-color);
         font-size: 1rem;
+    }
+
+    .timestamp-grey {
+        color: var(--secondary-text-color);
+        font-size: 0.8rem;
+        text-align: right;
     }
 
     .modern-list {
@@ -510,6 +524,10 @@
         /* 은은한 그림자 */
     }
 
+    .sub-wrapper:last-child {
+        margin-bottom: 10px; /* 마지막 요소의 하단 마진을 10으로 설정 */
+    }
+
     /* --- ul, li 디자인 개선 --- */
     /* 기본 ul 스타일 (sub-ul에도 적용) */
     ul {
@@ -676,7 +694,6 @@
         <div class='back-button-container'></div>
         <div>
             <h3 class='h3-title-primary'>
-                <data:blog.title />
             </h3>
         </div>
         <div class='header-right-placeholder'></div>
@@ -695,24 +712,10 @@
     </div>
     <div class='container' style="display: none;" id="main-container">
         <b:section class='main-content' id='main'>
-            <b:widget id='Blog1' locked='false' title='블로그 게시물' type='Blog' version='1'>
+            <b:widget id='Blog1' locked='false' title='블로그 게시물' type='Blog' version='2'>
                 <b:includable id='main1'>
                     <!-- 여기에 실제 구조 -->
-                    <b:include data='data:posts' name='posts' />
                     <b:include name='super.main' />
-                </b:includable>
-                <b:includable id='posts' var='posts'>
-                    <ul class='posts hierarchy'>
-                        <b:loop values='data:posts' var='post'>
-                            <script class='post-json' type='application/json'>
-                            {
-                                "title": "<data:post.title.jsonEscaped/>",
-                                "body": "<data:post.body.jsonEscaped/>",
-                                "url": "<data:post.url.jsonEscaped/>"
-                            }
-                            </script>
-                        </b:loop>
-                    </ul>
                 </b:includable>
             </b:widget>
         </b:section>
@@ -734,6 +737,34 @@
             } else {
                 $("#main-container").show();
                 $("#list-container").hide();
+
+                const jsonLdScript = $('.post script[type="application/ld+json"]');
+
+                if (jsonLdScript.length) {
+                    try {
+                        const postData = JSON.parse(jsonLdScript.text());
+                        console.log("파싱된 게시물 데이터:", postData);
+
+                        $(".h3-title-primary").html(postData.headline);
+
+                        const datePublished = postData.datePublished;
+                        if (datePublished) {
+                            const date = new Date(datePublished);
+
+                            // 날짜 및 시간 포맷 변경 (yyyy-mm-dd hh:mm:ss)
+                            const year = date.getFullYear();
+                            const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 패딩
+                            const day = date.getDate().toString().padStart(2, '0');
+
+                            const formattedDate = `${year}-${month}-${day}`;
+
+                            // 기존 타이틀 아래에 추가
+                            $('.post-body').after(`<div class='timestamp-grey'>${formattedDate}</div>`);
+                        }                        
+                    } catch (e) {
+                        console.error("JSON-LD 파싱 오류:", e);
+                    }
+                }
 
                 $(".back-button-container").html(`
                     <a href="https://developwhale.blogspot.com/" class="back-button">
