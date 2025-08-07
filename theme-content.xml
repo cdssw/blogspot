@@ -77,6 +77,8 @@
     .back-red-color-1 { background: #AF3E3E; } 
     .back-red-color-2 { background: #CD5656; }
     .back-red-color-3 { background: #DA6C6C; }
+    .back-naver-color { background: #04c75c; }
+    .back-kakao-color { background: #ffea03; }
 
         
     /* 기본 스타일: 모든 화면에 적용 */
@@ -201,8 +203,6 @@
         /* 메인 콘텐츠를 세로로 쌓음 (기본 위젯 배치를 위함) */
         justify-content: center;
         /* 세로 중앙 정렬 (내부 위젯이 하나일 경우 유용) */
-        align-items: center;
-        /* 가로 중앙 정렬 (내부 위젯이 하나일 경우 유용) */
     }
 
     .main-content {
@@ -688,6 +688,13 @@
         font-weight: bold;
         text-align: center;
     }
+
+    .simple-button-primary {
+        color: var(--primary-text-color);
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-align: center;
+    }    
 
     /* 호버 효과 (선택 사항) */
     .card-link:hover .simple-button {
