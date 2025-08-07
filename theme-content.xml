@@ -859,7 +859,7 @@
                 }
 
                 $(".back-button-container").html(`
-                    <a href="https://gen.developwhale.com/" class="back-button">
+                    <a href="https://num.developwhale.com/" class="back-button">
                         <span class="material-symbols-outlined">arrow_back_ios</span>
                         이전
                     </a>
