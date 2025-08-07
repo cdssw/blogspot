@@ -322,6 +322,40 @@
         padding-bottom: 2px;
     }
 
+    .title-white {
+        color: var(--white-text-color);
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .desc-title-primary {
+        color: var(--primary-text-color);
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+        border-left: 10px solid var(--primary-text-color);
+        padding: 0 5px;
+    }
+
+    .title-primary {
+        color: var(--primary-text-color);
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        padding: 0 5px;
+    }
+
+    .content-white {
+        color: var(--white-text-color);
+        font-size: 1rem;
+    }
+
+    .content-secondary {
+        color: var(--secondary-text-color);
+        font-size: 1rem;
+    }
+
     .title-black {
         color: var(--primary-text-color);
         font-size: 1.1rem;
@@ -342,7 +376,6 @@
 
     .modern-list {
         list-style: none;
-        margin: 20px 0;
         padding: 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #333;
@@ -494,6 +527,18 @@
         color: var(--primary-text-color);
         /* h2 색상 추가 (기존에는 body에서 상속) */
         padding-bottom: 20px;
+    }
+
+    .content-h2-margin {
+        font-size: 1.3rem;
+        color: var(--primary-text-color);
+        /* h2 색상 추가 (기존에는 body에서 상속) */
+        margin-bottom: 20px;
+    }
+    
+    .mark {
+        border-left: 10px solid var(--primary-text-color);
+        padding-left: 5px;
     }
 
     .content-h3 {
@@ -685,6 +730,46 @@
         font-weight: bold;
         color: #009879;
     }    
+
+    .card-button-color-0 {
+        background: #295F98;
+    }
+
+    .card-button-color-1 {
+        background: #555879;
+    }
+
+    .card-button-color-2 {
+        background: #748873;
+    }
+
+    .card-button-color-3 {
+        background: #AF3E3E;
+    }
+
+    .card-button-color-4 {
+        background: #604652;
+    }
+
+    .card-button-color-5 {
+        background: #5C7285;
+    }
+
+    .card-button-color-6 {
+        background: #9F5255;
+    }
+
+    .card-button-color-7 {
+        background: #624E88;
+    }
+
+    .card-button-color-8 {
+        background: #C96868;
+    }
+
+    .card-button-color-9 {
+        background: #8D493A;
+    }     
 ]]>
 </b:skin>
 
@@ -767,7 +852,7 @@
                 }
 
                 $(".back-button-container").html(`
-                    <a href="https://developwhale.blogspot.com/" class="back-button">
+                    <a href="https://gen.developwhale.com/" class="back-button">
                         <span class="material-symbols-outlined">arrow_back_ios</span>
                         이전
                     </a>

@@ -481,8 +481,8 @@
         </div>
         <div class='nav-container'>
             <ul class="navbar">
-                <li class="active"><a href="#">카테고리</a></li>
-                <li><a href="#">카테고리</a></li>
+                <li class="active"><a href="#">민생회복지원금</a></li>
+                <li><a href="#">정부지원금</a></li>
             </ul>
         </div>
     </header>
@@ -507,23 +507,23 @@
                     </b:loop>
 
                     <div class='desc-box'>
-                        <div class='item desc-title-primary'>DESC 제목</div>
-                        <div class='item content-secondary'>설명글1
-                            <br />설명글2
-                            <br />설명글3
+                        <div class='item desc-title-primary'>민생회복지원금</div>
+                        <div class='item content-secondary'>신청 기한이 얼마 남지 않아 서두르지 않으면 혜택을 놓칠 수 있습니다.
+                            <br />이번 기회는 다시 오지 않으니,
+                            <br />지금 바로 신청해서 꼭 받으세요.
                         </div>
-                        <div class='item-icon material-symbols-outlined'>train</div>
+                        <div class='item-icon material-symbols-outlined'>redeem</div>
                     </div>
                     <div class='card-box'>
-                        <div class='item title-primary'>타이틀</div>
-                        <div class='item card-body-column-2' id='req'>
+                        <div class='item title-primary'>신청방법</div>
+                        <div class='item card-body-column-2' id='id_a'>
                         </div>
                     </div>
                     <div class='ad-area'>
                     </div>
                     <div class='card-box'>
-                        <div class='item title-primary'>타이틀</div>
-                        <div class='item card-body-column-2' id='down'>
+                        <div class='item title-primary'>사용처/이의신청</div>
+                        <div class='item card-body-column-2' id='id_b'>
                         </div>
                     </div>                        
                 </b:includable>
@@ -573,10 +573,10 @@
                         </div>
                     </a>
                 `;
-                $("#req").append(newCard);
+                $("#id_a").append(newCard);
             });
 
-            const p2 = posts.filter(f => f.labels[0] === "다운로드").slice().reverse();
+            const p2 = posts.filter(f => f.labels[0] === "사용처/이의신청").slice().reverse();
             $(p2).each(function (index, item) {
                 const linkMatch = item.body.match(/\[link\](.*?)\[\/link\]/i);
                 const link = linkMatch ? linkMatch[1] : "#";
@@ -593,7 +593,7 @@
                         </div>
                     </a>
                 `;
-                $("#down").append(newCard);
+                $("#id_b").append(newCard);
             });
         });
     </script>
